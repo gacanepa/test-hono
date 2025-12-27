@@ -35,7 +35,15 @@ app.get('/exchange', async (c) => {
 app.get('/weather/:latitude/:longitude', async (c) => {
   const latitude = c.req.param('latitude');
   const longitude = c.req.param('longitude');
-  const response = await fetch(`${WEATHER_BASE_URL}/points/${latitude},${longitude}`);
+  const url = `${WEATHER_BASE_URL}/points/${latitude},${longitude}`;
+  /*
+  The National Weather Service API (api.weather.gov) requires a User-Agent header.
+  */
+  const response = await fetch(url, {
+    headers: {
+      'User-Agent': 'test-hono/1.0 (contact: johndoe@example.com)',
+    },
+  });
   if (!response.ok) {
     return c.json({ error: 'Failed to fetch weather' }, 500);
   }
