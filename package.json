@@ -1,6 +1,7 @@
 {
   "name": "test-hono",
   "type": "module",
+  "packageManager": "pnpm@10.26.2",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
